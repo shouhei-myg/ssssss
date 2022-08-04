@@ -1,19 +1,29 @@
 <h1>一覧表示</h1>
-
+<a href="{{ route('user.create') }}" style="text-decoration:none;">{{ __('新規申請') }}</a>
+<hr>
 <table>
-<tr>
-<th>ID</th>
-<th>名前</th>
-<th>item</th>
+  <tr>
+  <th>名前</th>
+  <th>品名</th>
+  <th>url</th>
+  <th>申請日</th>
 </tr>
-@foreach($items as $item)
+@foreach( $items as $item )
 <tr>
-    <td>{{$item->id}}</td>
-    <td>{{$item->user_id}}</td>
-    <td><a href="{{$item->item}}" target="_blank">{{$item->item}}</a></td>
+    <td>{{ $item->user_id }}</td>
+    <td>{{ $item->product_name }}</td>
+    <td><a href="{{ $item->url }}" style="text-decoration:none;" target="_blank">{{$item->url}}</a></td>
+    <td>{{ $item->created_at }}</td>
     <td>
-        @if($item->user_id == 2)
-        <a href="#">削除</a>
+        @if( $item->user_id == $my_id )
+        <form action="{{ route('user.destroy', ['id'=>$item->id]) }}" method="POST">
+          @csrf
+          <button type="submit" class="btn btn-danger">削除</button>
+        </form>
+
+
+
+
         @endif
     </td>
 </tr>
