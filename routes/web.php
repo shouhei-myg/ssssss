@@ -22,7 +22,12 @@ Auth::routes();
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
 
 Route::group(['prefix'=>'user'], function () {
-    Route::get('index', 'UserController@index')->name('user.index');
-  });
 
-Route::get('create', 'UserController@create')->name('user.create');
+  Route::get('index', 'App\Http\Controllers\UserController@index')->name('user.index');
+
+  Route::get('create', 'App\Http\Controllers\UserController@create')->name('user.create');
+
+  Route::post('store', 'App\Http\Controllers\UserController@store')->name('user.store');
+
+  Route::post('destroy/{id}', 'App\Http\Controllers\UserController@destroy')->name('user.destroy');
+});
