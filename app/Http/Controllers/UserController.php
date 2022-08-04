@@ -57,6 +57,7 @@ class UserController extends Controller
         $item=new Item;
         $item->product_name = $request->input('product_name');
         $item->url = $request->input('url');
+        $item->usage = $request->input('usage');
         $item->user_id = Auth::id();
         $item->save();
 

@@ -10,6 +10,10 @@
     <label for="url">itemURL</label>
     <input type="text" name="url" id="url">
   </div>
+  <div>
+    <label for="usage">用途</label>
+    <input type="text" name="usage" id="usage">
+  </div>
   <br>
   <button type="submit">申請</button>
 </form>
