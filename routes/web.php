@@ -31,3 +31,4 @@ Route::group(['prefix'=>'user'], function () {
 
   Route::post('destroy/{id}', 'App\Http\Controllers\UserController@destroy')->name('user.destroy');
 });
+
