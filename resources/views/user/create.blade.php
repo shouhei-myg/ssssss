@@ -1,5 +1,6 @@
 <h1>新規申請</h1>
-
+<hr>
+<br>
 <form method="POST" action="{{route('user.store')}}">
   @csrf
   <div>
