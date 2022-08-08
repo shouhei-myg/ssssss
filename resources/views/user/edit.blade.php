@@ -1,5 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
 <h1>さー、どうしますか？</h1>
-<hr>
 <br>
   <div>
     <tr>
@@ -20,3 +22,4 @@
     </tr>
   </div>
   <a href="{{ route('user.index') }}">{{ __('一覧へ戻る') }}</a>
+  @endsection
