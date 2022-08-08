@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('product_name');
             $table->string('url');
+            $table->string('usage');
+            $table->string('situation')->nullable();
             $table->timestamps();
         });
     }

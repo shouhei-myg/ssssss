@@ -25,13 +25,14 @@ class UserController extends Controller
     // itemDBから取得し一覧画面に表示
     public function index() {
         //userテーブルからname,を$usersに格納
-        $items=DB::table('items')
+        $items = DB::table('items')
+            ->select('items.id as item_id', 'users.id as user_id', 'product_name', 'name', 'usage', 'items.created_at', 'situation', 'url')
+            ->join('users', 'items.user_id', '=', 'users.id')
             ->get();
-        
-        $my_id = Auth::id();
+        $user = Auth::user();
 
         //viewを返す(compactでviewに$usersを渡す)
-        return view('user/index', compact('items', 'my_id'));
+        return view('user/index', compact('items', 'user'));
     }
 
     /**
@@ -57,6 +58,7 @@ class UserController extends Controller
         $item=new Item;
         $item->product_name = $request->input('product_name');
         $item->url = $request->input('url');
+        $item->usage = $request->input('usage');
         $item->user_id = Auth::id();
         $item->save();
 
@@ -83,7 +85,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::find($id);
+
+        return view('user/edit', compact('item'));
+
     }
 
     /**
@@ -95,7 +100,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Item::find($id);
+        $item->situation=$request->input('situation');
+
+        //DBに保存
+        $item->save();
+
+        //処理が終わったらmember/indexにリダイレクト
+        return redirect('user/index');
     }
 
     /**
