@@ -120,8 +120,9 @@ class UserController extends Controller
     public function destroy($id) {
         // itemテーブルから指定のIDのレコード1件を取得
         $item = Item::find($id);
+        $user_id = Auth::id();
         // dd($item->situation);
-        if($item->situation == null) {
+        if($item->situation == null && $item->user_id == $user_id) {
             // レコードを削除
             $item->delete();
         }
