@@ -2,6 +2,8 @@
 
 @section('content')
 <h1>新規申請</h1>
+<a href="https://www.amazon.co.jp/" style="text-decoration:none;" target="_blank">amazonで探す</a>
+<br>
 <br>
 <form method="POST" action="{{route('user.store')}}">
   @csrf
@@ -20,5 +22,6 @@
   <br>
   <button type="submit">申請</button>
 </form>
-<a href="{{ route('user.index') }}">{{ __('一覧へ戻る') }}</a>
+<br>
+<a href="{{ route('user.index') }}" style="text-decoration:none;">{{ __('一覧へ戻る') }}</a>
 @endsection

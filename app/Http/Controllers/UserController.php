@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use Illuminate\Support\Facades\Facade;
 
 class UserController extends Controller
 {
@@ -43,7 +44,7 @@ class UserController extends Controller
 
      // itemの申請一覧画面
     public function create() {
-
+        
         return view('user/create');
     }
 
@@ -54,7 +55,6 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-
         $item=new Item;
         $item->product_name = $request->input('product_name');
         $item->url = $request->input('url');
@@ -72,8 +72,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -100,8 +99,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = Item::find($id);
-        $item->situation=$request->input('situation');
+        $item = $this->getMyItem($id);
+        $item->situation = $request->input('situation');
 
         //DBに保存
         $item->save();
@@ -116,17 +115,34 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function destroy($id) {
-        // itemテーブルから指定のIDのレコード1件を取得
-        $item = Item::find($id);
-        $user_id = Auth::id();
-        // dd($item->situation);
-        if($item->situation == null && $item->user_id == $user_id) {
+        //public function getMyItemでitemテーブルから指定のIDのレコード1件を取得
+        $item = $this->getMyItem($id);
+
+        if($item) {
             // レコードを削除
             $item->delete();
         }
         // 削除したら一覧画面にリダイレクト
         return redirect()->route('user.index');
     }
+
+    /**
+     * itemテーブルから指定のIDのレコード1件を取得
+     *
+     * @param  int  $id
+     * @return Item
+     */
+    public function getMyItem($id) {
+        $item = Item::where('user_id', '=', Auth::id())
+            ->where('situation', '=', null)
+            ->find($id);
+        return $item;
+    }
+
+    public function storeMyItem() {
+        
+    }
+
+
 }
