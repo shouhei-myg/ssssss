@@ -21,7 +21,7 @@
     <td>{{ $item->created_at }}</td>
     <td>{{ $item->situation }}</td>
     <td>
-      @if( $item->user_id == $user->id )
+      @if( $item->user_id == $user->id && !$item->situation)
         <form action="{{ route('user.destroy', ['id'=>$item->item_id]) }}" method="post">
           @csrf
           <button type="submit" class="">削除</button>
@@ -29,7 +29,7 @@
       @endif
     </td>
     <td>
-      @if( $user->role == 1 )
+      @if( $user->role == 1 && !$item->situation)
         <a href="{{route('user.edit',['id'=>$item->item_id])}}">{{ __(' 審査') }}</a>
       @endif
     </td>

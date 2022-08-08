@@ -120,8 +120,11 @@ class UserController extends Controller
     public function destroy($id) {
         // itemテーブルから指定のIDのレコード1件を取得
         $item = Item::find($id);
-        // レコードを削除
-        $item->delete();
+        // dd($item->situation);
+        if($item->situation == null) {
+            // レコードを削除
+            $item->delete();
+        }
         // 削除したら一覧画面にリダイレクト
         return redirect()->route('user.index');
     }
