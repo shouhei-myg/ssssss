@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>また君か！今日は何を頼むのかな？💖</h1>
+<h1 style="text-align: center; margin-top: 20px; margin-bottom: 40px;">また君か！今日は何を頼むのかな？💖</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

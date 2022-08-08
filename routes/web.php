@@ -30,5 +30,10 @@ Route::group(['prefix'=>'user'], function () {
   Route::post('store', 'App\Http\Controllers\UserController@store')->name('user.store');
 
   Route::post('destroy/{id}', 'App\Http\Controllers\UserController@destroy')->name('user.destroy');
+
+  Route::get('edit/{id}', 'App\Http\Controllers\UserController@edit')->name('user.edit');
+  
+  Route::post('update/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
 });
+
 
