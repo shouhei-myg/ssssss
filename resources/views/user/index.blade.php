@@ -1,10 +1,8 @@
+@extends('layouts.app')
+
+@section('content')
 <h1>一覧表示</h1>
-<form action="{{ url('/logout') }}" method="post">
-  {{ csrf_field() }}
-  <button type="submit">ログアウト</button>
-</form>
 <a href="{{ route('user.create') }}" style="text-decoration:none;">{{ __('新規申請') }}</a>
-<hr>
 <table>
   <tr>
     <th>名前</th>
@@ -36,3 +34,5 @@
   </tr>
   @endforeach
 </table>
+@endsection
+
