@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Facade;
 
 class UserController extends Controller
@@ -72,9 +73,6 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -99,8 +97,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = $this->getMyItem($id);
+        $item = Item::find($id);
         $item->situation = $request->input('situation');
+        
 
         //DBに保存
         $item->save();
@@ -143,6 +142,5 @@ class UserController extends Controller
     public function storeMyItem() {
         
     }
-
 
 }

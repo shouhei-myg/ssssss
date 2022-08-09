@@ -9,17 +9,19 @@
         <form method="post" action="{{route('user.update',['id' =>$item->id])}}">
             @csrf
             <input type="hidden" name="situation" id="situation" value="ok" required>
-            <button type="submit">購入する</button>
+            <button type="submit" class="btn btn-primary">購入する</button>
         </form>
       </td>
+      <br>
       <td>
       <form method="post" action="{{route('user.update',['id' =>$item->id])}}">
             @csrf
             <input type="hidden" name="situation" id="situation" value="ng" required>
-            <button type="submit">いりません</button>
+            <button type="submit" class="btn btn-danger">いりません</button>
         </form>
       </td>
     </tr>
   </div>
+  <br>
   <a href="{{ route('user.index') }}">{{ __('一覧へ戻る') }}</a>
   @endsection
